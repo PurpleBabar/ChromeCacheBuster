@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "Cache Buster",
+  "description": "adds a buster to your calls",
+  "icons": {
+      "16": "icons/icon16.png",
+      "20": "icons/icon20.png",
+      "32": "icons/icon32.png",
+      "64": "icons/icon64.png",
+      "128": "icons/icon128.png"
+  },
+  "version": "1.0",
+  "background": {
+    "scripts": ["buster.js"]
+  },
+  "browser_action": {
+        "name": "Click to activate the cache buster"
+  },
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ]
+}
