@@ -17,6 +17,13 @@ chrome.browserAction.onClicked.addListener(function(tab) {
     active = !active;
     if (active) {
         chrome.browserAction.setIcon({path:"active.png"});
+        var types = ["main_frame"];
+        if (localStorage["cacheBusterCss"] == 'true') {
+            types.push("stylesheet");
+        }
+        if (localStorage["cacheBusterJs"] == 'true') {
+            types.push("script");
+        }
         chrome.webRequest.onBeforeRequest.addListener(
         buster,
           // filters
@@ -24,10 +31,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
             urls: [
             "<all_urls>"
             ],
-            types: [
-            "main_frame"
-            ]
-
+            types: types
           },
           // extraInfoSpec
           ["blocking"]);
