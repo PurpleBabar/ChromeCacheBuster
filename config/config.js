@@ -1,15 +1,18 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    if (localStorage["cacheBusterCss"] == 'true') {
-        document.getElementById('css').checked = localStorage["css"];
-    }
-    if (localStorage["cacheBusterJs"] == 'true') {
-        document.getElementById('js').checked = localStorage["js"];
-    }
+  var cacheBuster = JSON.parse(localStorage.cacheBuster);
 
-    var form = document.getElementById('config');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); // don't submit
-        localStorage["cacheBusterCss"] = document.getElementById('css').checked;
-        localStorage["cacheBusterJs"] = document.getElementById('js').checked;
-    })
+  document.getElementById('css').checked = cacheBuster.css;
+  document.getElementById('js').checked = cacheBuster.js;
+
+  var form = document.getElementById('config');
+  form.addEventListener('submit', function(e) {
+      e.preventDefault(); // don't submit
+      
+      var cacheBuster = JSON.parse(localStorage.cacheBuster);
+      
+      cacheBuster.css = document.getElementById('css').checked;
+      cacheBuster.js = document.getElementById('js').checked;
+      
+      localStorage.cacheBuster = JSON.stringify(cacheBuster)
+  })
 });
